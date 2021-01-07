@@ -69,7 +69,6 @@ const actions = {
         const { roles, user } = data
         // eslint-disable-next-line no-unused-vars
         const { email, name, headImgPath } = user
-        console.log(email)
         commit('SET_INTRODUCTION', user.introduction || '耀眼的风')
         commit('SET_ROLES', roles)
         commit('SET_EMAIL', email)
@@ -103,6 +102,11 @@ const actions = {
       commit('RESET_STATE')
       resolve()
     })
+  },
+
+  // set user avatar
+  setUserAvatar({ commit }, avatar) {
+    commit('SET_AVATAR', avatar)
   }
 }
 

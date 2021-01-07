@@ -43,7 +43,7 @@ export default {
     },
     menubar: {
       type: String,
-      default: 'file edit insert view format record'
+      default: 'file edit insert view format table'
     },
     height: {
       type: [Number, String],

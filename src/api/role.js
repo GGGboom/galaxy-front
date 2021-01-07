@@ -9,23 +9,22 @@ export function getRoutes() {
 
 export function getRoles() {
   return request({
-    url: '/vue-element-admin/roles',
+    url: '/system/getRoleWithPrivilege',
     method: 'get'
   })
 }
 
-export function addRole(data) {
+export function getAllUser() {
   return request({
-    url: '/vue-element-admin/role',
-    method: 'post',
-    data
+    url: '/system/all',
+    method: 'get'
   })
 }
 
-export function updateRole(id, data) {
+export function updateRole(data) {
   return request({
-    url: `/vue-element-admin/role/${id}`,
-    method: 'put',
+    url: `/system/setUserRole`,
+    method: 'post',
     data
   })
 }

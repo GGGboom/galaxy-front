@@ -2,39 +2,39 @@ import request from '@/utils/request'
 
 export function fetchList(query) {
   return request({
-    url: '/vue-element-admin/article/list',
+    url: '/blog/all',
     method: 'get',
     params: query
   })
 }
 
-export function fetchArticle(id) {
+export function fetchBLog(id) {
   return request({
-    url: '/vue-element-admin/article/detail',
+    url: '/blog/getBlog',
     method: 'get',
-    params: { id }
+    params: { blogId: id }
   })
 }
 
-export function fetchPv(pv) {
+export function deleteBlog(blogId) {
   return request({
-    url: '/vue-element-admin/article/pv',
+    url: '/blog/delete',
     method: 'get',
-    params: { pv }
+    params: { blogId }
   })
 }
 
-export function createArticle(data) {
+export function createBlog(data) {
   return request({
-    url: '/vue-element-admin/article/create',
+    url: '/blog/add',
     method: 'post',
     data
   })
 }
 
-export function updateArticle(data) {
+export function updateBlog(data) {
   return request({
-    url: '/vue-element-admin/article/update',
+    url: '/blog/update',
     method: 'post',
     data
   })

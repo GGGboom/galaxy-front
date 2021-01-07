@@ -3,13 +3,13 @@
     <el-table v-loading="listLoading" :data="list" border fit highlight-current-row style="width: 100%">
       <el-table-column align="center" label="ID" width="80">
         <template slot-scope="scope">
-          <span>{{ scope.row.id }}</span>
+          <span>{{ scope.row.blog.userId }}</span>
         </template>
       </el-table-column>
 
       <el-table-column width="180px" align="center" label="Date">
         <template slot-scope="scope">
-          <span>{{ scope.row.timestamp | parseTime('{y}-{m}-{d} {h}:{i}') }}</span>
+          <span>{{ scope.row.blog.createTime }}</span>
         </template>
       </el-table-column>
 
@@ -19,31 +19,17 @@
         </template>
       </el-table-column>
 
-      <el-table-column width="100px" label="Importance">
-        <template slot-scope="scope">
-          <svg-icon v-for="n in +scope.row.importance" :key="n" icon-class="star" class="meta-item__icon" />
-        </template>
-      </el-table-column>
-
-      <el-table-column class-name="status-col" label="Status" width="110">
-        <template slot-scope="{row}">
-          <el-tag :type="row.status | statusFilter">
-            {{ row.status }}
-          </el-tag>
-        </template>
-      </el-table-column>
-
       <el-table-column min-width="300px" label="Title">
         <template slot-scope="{row}">
           <router-link :to="'/example/edit/'+row.id" class="link-type">
-            <span>{{ row.title }}</span>
+            <span>{{ row.blog.blogTitle }}</span>
           </router-link>
         </template>
       </el-table-column>
 
       <el-table-column align="center" label="Actions" width="120">
         <template slot-scope="scope">
-          <router-link :to="'/example/edit/'+scope.row.id">
+          <router-link :to="'/example/edit/'+scope.row.blog.blogId">
             <el-button type="primary" size="small" icon="el-icon-edit">
               Edit
             </el-button>
@@ -59,6 +45,7 @@
 <script>
 import { fetchList } from '@/api/blog'
 import Pagination from '@/components/Pagination' // Secondary package based on el-pagination
+import { formatTime } from '@/utils'
 
 export default {
   name: 'ArticleList',
@@ -79,8 +66,8 @@ export default {
       total: 0,
       listLoading: true,
       listQuery: {
-        page: 1,
-        limit: 20
+        pageNum: 0,
+        pageSize: 10
       }
     }
   },
@@ -91,7 +78,11 @@ export default {
     getList() {
       this.listLoading = true
       fetchList(this.listQuery).then(response => {
-        this.list = response.data.items
+        this.list = response.data.list
+        this.list.forEach(item => {
+          item.blog.createTime = formatTime(item.blog.createTime)
+        })
+        console.log(response.data.list)
         this.total = response.data.total
         this.listLoading = false
       })

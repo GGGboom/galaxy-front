@@ -147,7 +147,7 @@
 </template>
 
 <script>
-import { fetchList, fetchPv, createArticle, updateArticle } from '@/api/blog'
+import { fetchList, updateArticle } from '@/api/blog'
 import waves from '@/directive/waves' // waves directive
 import { parseTime } from '@/utils'
 import Pagination from '@/components/Pagination' // secondary package based on el-pagination
@@ -377,3 +377,22 @@ export default {
   }
 }
 </script>
+<style scoped>
+.filter-container {
+  padding-bottom: 10px;
+}
+.filter-container .filter-item {
+  display: inline-block;
+  vertical-align: middle;
+  margin-bottom: 10px;
+}
+.el-input--medium {
+  font-size: 14px;
+}
+.el-input {
+  position: relative;
+  font-size: 14px;
+  display: inline-block;
+  width: 100%;
+}
+</style>
